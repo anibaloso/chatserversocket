@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChatServerApp.Comunicacion
 {
-    public class ServerSockets //lo cambie a publico **1**
+    public class ServerSocket //lo cambie a publico **1**
     {
         private int puerto;
         private Socket servidor;
@@ -17,7 +17,7 @@ namespace ChatServerApp.Comunicacion
         private StreamReader reader;
         private StreamWriter writer;
 
-        public ServerSockets(int puerto)
+        public ServerSocket(int puerto)
         {
             puerto = this.puerto;
         }
@@ -27,7 +27,7 @@ namespace ChatServerApp.Comunicacion
             try
             {
                 //1.crear el socket
-                this.servidor = new Socket(AddressFamily.InterNetwork, SocketType.Stream,ProtocolType.Tcp); //creee una nueva instancia de socket
+                this.servidor = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); //creee una nueva instancia de socket
 
                 //2.tomar control del puerto
                 this.servidor.Bind(new IPEndPoint(IPAddress.Any, this.puerto));

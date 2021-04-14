@@ -14,7 +14,7 @@ namespace ChatServerApp
         {
             int puerto = Convert.ToInt32(ConfigurationManager.AppSettings["puerto"]);
             Console.WriteLine("Iniciando servidor en el puerto {0}",puerto);
-            ServerSockets servidor = new ServerSockets(puerto);
+            ServerSocket servidor = new ServerSocket(puerto);
             if (servidor.Iniciar())
             {
                 while (true)
@@ -27,10 +27,19 @@ namespace ChatServerApp
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("cliente conectado");
-                        Console.WriteLine("S: hola cliente");
-                        servidor.Escribir("hola Cliente");
-                        string mensaje = servidor.Leer();
-                        Console.WriteLine("c: {0}", mensaje);
+                        string mensaje = "";
+                        while(mensaje.ToLower() != "chao")
+                        {
+                            mensaje = servidor.Leer();
+                            Console.WriteLine("C:{0}", mensaje);
+                            if (mensaje.ToLower() != "chao")
+                            {
+                                Console.WriteLine("S: hola cliente");
+                                mensaje = Console.ReadLine().Trim();
+                                Console.WriteLine("S:{0}", mensaje);
+                                servidor.Escribir("hola Cliente");
+                            }
+                        }
                         servidor.CerrarConexion();
 
                     }
